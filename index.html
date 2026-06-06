@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midhun Krishna | Cybersecurity Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid #334155;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: var(--text-main);
+        }
+
+        header p {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin: 0.5rem 0 1.5rem 0;
+            font-weight: 600;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 0.5rem 1rem;
+            background-color: var(--card-bg);
+            border: 1px solid #334155;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid #334155;
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        .skill-card h3 {
+            margin-top: 0;
+            color: var(--text-main);
+            border-bottom: 2px solid #334155;
+            padding-bottom: 0.5rem;
+        }
+
+        .skill-tags {
+            color: var(--text-muted);
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card h3 {
+            margin-top: 0;
+            color: var(--text-main);
+        }
+
+        .project-meta {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            padding-left: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>Midhun Krishna</h1>
+            <p>Cybersecurity Analyst</p>
+            <div class="social-links">
+                <a href="mailto:midhun.krishna9104@gmail.com">Email</a>
+                <a href="https://linkedin.com/in/midhunkrishna02" target="_blank">LinkedIn</a>
+                <a href="https://tryhackme.com/p/MidhunKrishna" target="_blank">TryHackMe</a>
+            </div>
+        </header>
+
+        <!-- About / Summary Section -->
+        <section id="about">
+            <h2>Professional Summary</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">
+                Certified Ethical Hacker (CEH) and BCA graduate seeking an entry-level Cybersecurity Analyst or SOC Analyst role. Proven capability across 50+ live-fire laboratory environments executing end-to-end vulnerability assessments, active reconnaissance, and network traffic analysis.
+            </p>
+        </section>
+
+        <!-- Certifications & Skills Section -->
+        <section id="skills">
+            <h2>Technical Toolkit & Certifications</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Certifications</h3>
+                    <div class="skill-tags">
+                        • Certified Ethical Hacker (CEH)<br>
+                        • SQL Injection Attacks (EC-Council)<br>
+                        • Cyber Security Cadet (Udemy)
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>Security Tools</h3>
+                    <div class="skill-tags">Nmap, Burp Suite, Wireshark, Metasploit, Nikto, OpenVAS</div>
+                </div>
+                <div class="skill-card">
+                    <h3>Core Concepts</h3>
+                    <div class="skill-tags">VAPT, OWASP Top 10, SIEM Fundamentals, TCP/IP, Firewalls, VPNs</div>
+                </div>
+                <div class="skill-card">
+                    <h3>Environments</h3>
+                    <div class="skill-tags">Kali Linux, Ubuntu, Windows 10/11, VMware, VirtualBox</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Practical Security Projects</h2>
+            
+            <div class="project-card">
+                <h3>Cybersecurity Lab Practitioner</h3>
+                <div class="project-meta">TryHackMe Platform</div>
+                <ul>
+                    <li><strong>Vulnerability Assessment:</strong> Completed over 50+ hands-on simulated environments covering automated scanning and active reconnaissance.</li>
+                    <li><strong>Exploitation:</strong> Utilized the Metasploit Framework to identify system loopholes, configure exploit payloads, and execute privilege escalation vectors safely.</li>
+                    <li><strong>Web Application Testing:</strong> Audited lab applications against the OWASP Top 10 framework, manually exploiting and mitigating SQLi and XSS flaws.</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <h3>Information Security Home Lab Architect</h3>
+                <div class="project-meta">Personal Infrastructure</div>
+                <ul>
+                    <li><strong>Environment Simulation:</strong> Engineered an isolated virtual network architecture using VMware and VirtualBox hosting cross-functional Linux and Windows instances.</li>
+                    <li><strong>Attack & Defense Emulation:</strong> Safely simulated multi-stage attack scenarios to validate security baseline configurations and study system hardening techniques.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <h2>Education</h2>
+            <h3 style="margin-bottom:0.2rem;">Bachelor of Computer Applications (BCA)</h3>
+            <div style="color: var(--accent); font-size: 0.9rem; margin-bottom: 0.5rem;">University of Kerala | Coursework Completed: 2021 – 2024</div>
+            <p style="color: var(--text-muted); margin-top:0;">
+                Completed 3 years of standard classroom curriculum, practical labs, and core syllabus. Currently appearing for final backlog modules to formally finish degree certification.
+            </p>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Midhun Krishna. All rights reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

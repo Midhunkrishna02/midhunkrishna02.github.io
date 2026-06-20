@@ -3,227 +3,441 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Midhun Krishna | Cybersecurity Portfolio</title>
+    <title>Midhun Krishna | Cyber Security Command Center</title>
     <style>
+        /* --- Cyberpunk Terminal Reset & Theme Variables --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8;
-            --accent-hover: #0ea5e9;
+            --bg-dark: #06070a;
+            --panel-bg: #0c0f17;
+            --border-glow: #1a2233;
+            --matrix-green: #00ff66;
+            --warning-amber: #ffb700;
+            --text-bright: #ffffff;
+            --text-dim: #707a8a;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            color: var(--text-bright);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+            background-size: 100% 4px;
+        }
+
+        /* --- Main Command Center Wrapper --- */
+        .command-center {
+            background-color: var(--panel-bg);
+            border: 2px solid var(--border-glow);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 750px;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* --- Top Terminal Header --- */
+        .terminal-header {
+            background-color: #080a10;
+            border-bottom: 2px solid var(--border-glow);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #222;
+        }
+        .dot.red { background-color: #ff5f56; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #27c93f; }
+
+        .terminal-title {
+            color: var(--text-dim);
+            font-weight: bold;
+        }
+
+        /* --- Identity Banner --- */
+        .identity-banner {
+            padding: 30px 30px 20px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-bottom: 1px dashed var(--border-glow);
+        }
+
+        .glitch-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-bright);
+            letter-spacing: -1px;
+        }
+
+        .glitch-title span {
+            color: var(--matrix-green);
+            text-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+        }
+
+        .clearance-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .clearance-badge {
+            background-color: rgba(255, 183, 0, 0.1);
+            border: 1px solid var(--warning-amber);
+            color: var(--warning-amber);
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .clearance-badge.green-badge {
+            background-color: rgba(0, 255, 102, 0.1);
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+        }
+
+        /* --- High-Tech Navigation Tabs --- */
+        .terminal-tabs {
+            display: flex;
+            background-color: #080a10;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            border-right: 1px solid var(--border-glow);
+            color: var(--text-dim);
+            padding: 14px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .tab-btn:hover {
+            color: var(--matrix-green);
+            background-color: rgba(0, 255, 102, 0.02);
+        }
+
+        .tab-btn.active {
+            color: var(--matrix-green);
+            background-color: var(--panel-bg);
+            border-bottom: 2px solid var(--matrix-green);
+        }
+
+        /* --- Dynamic Content Area --- */
+        .panel-content {
+            padding: 30px;
+            min-height: 280px;
+        }
+
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .section-header {
+            color: var(--matrix-green);
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        .terminal-text {
+            color: #b2b9c5;
+            font-size: 14px;
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
+            margin-bottom: 15px;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+        /* --- Lab Projects Styling --- */
+        .lab-card {
+            background-color: #090c12;
+            border: 1px solid var(--border-glow);
+            border-left: 3px solid var(--matrix-green);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
         }
 
-        header {
-            text-align: center;
-            padding: 3rem 0;
-            border-bottom: 1px solid #334155;
+        .lab-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--text-bright);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            color: var(--text-main);
+        .lab-desc {
+            font-size: 13px;
+            color: #949da9;
+            line-height: 1.5;
         }
 
-        header p {
-            color: var(--accent);
-            font-size: 1.2rem;
-            margin: 0.5rem 0 1.5rem 0;
-            font-weight: 600;
-        }
-
-        .social-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin: 0 10px;
-            padding: 0.5rem 1rem;
-            background-color: var(--card-bg);
-            border: 1px solid #334155;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        section {
-            padding: 3rem 0;
-            border-bottom: 1px solid #334155;
-        }
-
-        h2 {
-            color: var(--accent);
-            font-size: 1.8rem;
-            margin-top: 0;
-        }
-
+        /* --- Grid System for Skills --- */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
-        .skill-card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid #334155;
+        @media(max-width: 500px) {
+            .skills-grid { grid-template-columns: 1fr; }
         }
 
-        .skill-card h3 {
-            margin-top: 0;
-            color: var(--text-main);
-            border-bottom: 2px solid #334155;
-            padding-bottom: 0.5rem;
+        .skill-category {
+            border: 1px dashed var(--border-glow);
+            padding: 15px;
+            border-radius: 4px;
         }
 
-        .skill-tags {
-            color: var(--text-muted);
+        .category-title {
+            font-size: 13px;
+            color: var(--warning-amber);
+            margin-bottom: 8px;
+            font-weight: bold;
         }
 
-        .project-card {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid #334155;
-            margin-bottom: 1.5rem;
+        .skill-list {
+            font-size: 13px;
+            color: #b2b9c5;
+            line-height: 1.6;
         }
 
-        .project-card h3 {
-            margin-top: 0;
-            color: var(--text-main);
+        /* --- Social Integration Grid --- */
+        .social-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+            margin-bottom: 25px;
         }
 
-        .project-meta {
-            color: var(--accent);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        ul {
-            padding-left: 1.2rem;
-            color: var(--text-muted);
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        footer {
+        .social-link {
+            border: 1px solid var(--border-glow);
+            padding: 12px;
             text-align: center;
-            padding: 2rem 0;
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            text-decoration: none;
+            color: var(--text-bright);
+            font-size: 13px;
+            background: rgba(255,255,255,0.01);
+            transition: all 0.2s;
+        }
+
+        .social-link:hover {
+            border-color: var(--matrix-green);
+            color: var(--matrix-green);
+            background: rgba(0,255,102,0.02);
+        }
+
+        /* --- Resume Download Anchor Button --- */
+        .resume-download-btn {
+            display: block;
+            width: 100%;
+            background: rgba(255, 183, 0, 0.05);
+            border: 1px solid var(--warning-amber);
+            color: var(--warning-amber);
+            padding: 16px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 183, 0, 0.02);
+        }
+
+        .resume-download-btn:hover {
+            background: rgba(255, 183, 0, 0.15);
+            box-shadow: 0 0 15px rgba(255, 183, 0, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* --- Bottom Telemetry Matrix --- */
+        .terminal-footer {
+            background-color: #080a10;
+            border-top: 2px solid var(--border-glow);
+            padding: 12px 20px;
+            font-size: 11px;
+            color: var(--text-dim);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Header Section -->
-        <header>
-            <h1>Midhun Krishna</h1>
-            <p>Cybersecurity Analyst</p>
-            <div class="social-links">
-                <a href="mailto:midhun.krishna9104@gmail.com">Email</a>
-                <a href="https://linkedin.com/in/midhunkrishna02" target="_blank">LinkedIn</a>
-                <a href="https://tryhackme.com/p/MidhunKrishna" target="_blank">TryHackMe</a>
-                <a href="resume.pdf" target="blank" style="border-color: var(--accent);">View Resume</a>
+    <div class="command-center">
+        
+        <!-- Terminal Control Bar -->
+        <div class="terminal-header">
+            <div class="window-controls">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
             </div>
-        </header>
+            <div class="terminal-title">M_KRISHNA // SOC_NODE_01</div>
+            <div style="color: var(--matrix-green);">● MONITOR_ACTIVE</div>
+        </div>
 
-        <!-- About / Summary Section -->
-        <section id="about">
-            <h2>Professional Summary</h2>
-            <p style="color: var(--text-muted); font-size: 1.1rem;">
-                Certified Ethical Hacker (CEH) and BCA graduate seeking an entry-level Cybersecurity Analyst or SOC Analyst role. Proven capability across 50+ live-fire laboratory environments executing end-to-end vulnerability assessments, active reconnaissance, and network traffic analysis.
-            </p>
-        </section>
+        <!-- System Identity Frame -->
+        <div class="identity-banner">
+            <div class="clearance-container">
+                <div class="clearance-badge">SEC_AUTH // CEH CERTIFIED</div>
+                <div class="clearance-badge green-badge">KKEM // K-DISC ACCREDITED</div>
+            </div>
+            <div class="glitch-title">MIDHUN <span>KRISHNA</span></div>
+            <div style="font-size: 13px; color: var(--text-dim);">DESIRED ROLE: CYBERSECURITY ANALYST / SOC ANALYST</div>
+        </div>
 
-        <!-- Certifications & Skills Section -->
-        <section id="skills">
-            <h2>Technical Toolkit & Certifications</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>Certifications</h3>
-                    <div class="skill-tags">
-                        • Certified Ethical Hacker (CEH)<br>
-                        • SQL Injection Attacks (EC-Council)<br>
-                        • Cyber Security Cadet (Udemy)
+        <!-- Navigation Matrix Tabs -->
+        <div class="terminal-tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'overview')">[01] OVERVIEW</button>
+            <button class="tab-btn" onclick="openTab(event, 'labs')">[02] HACKER LABS</button>
+            <button class="tab-btn" onclick="openTab(event, 'arsenal')">[03] ARSENAL</button>
+        </div>
+
+        <!-- Interactive Panels Panel -->
+        <div class="panel-content">
+            
+            <!-- Tab 1: System Overview -->
+            <div id="overview" class="tab-panel active">
+                <div class="section-header">> INITIALIZING PROFILE_SUMMARY...</div>
+                <p class="terminal-text">
+                    BCA Graduate and Certified Ethical Hacker (CEH) backed by vocational skill integration through the Kerala Knowledge Economy Mission and K-DISC programs. Focused on offensive vulnerability testing and proactive event logging.
+                </p>
+                <p class="terminal-text">
+                    Proven capability monitoring infrastructure, mapping anomalies, and parsing packets inside 50+ live-fire laboratory environments. Ready for fast integration into an enterprise Security Operations Center (SOC).
+                </p>
+                
+                <div class="section-header" style="margin-top: 25px;">> EXTERNAL SECURE RELAYS</div>
+                <div class="social-row">
+                    <a href="https://github.com/Midhunkrishna02/" target="_blank" class="social-link" style="border-color: var(--matrix-green); color: var(--matrix-green);">GITHUB_REPOS // ACTIVE</a>
+                    <a href="https://tryhackme.com/p/MidhunKrishna" target="_blank" class="social-link" style="border-color: var(--matrix-green); color: var(--matrix-green);">TRYHACKME // MATRIX</a>
+                    <a href="https://www.linkedin.com/in/midhunkrishna02/" target="_blank" class="social-link" style="border-color: var(--matrix-green); color: var(--matrix-green);">LINKEDIN_CONN // ACTIVE</a>
+                    <a href="mailto:midhun.krishna9104@gmail.com" class="social-link">SECURE_EMAIL</a>
+                </div>
+
+                <!-- Resume Download Section -->
+                <div class="section-header">> TRANSMIT DATA FILE</div>
+                <a href="resume.pdf" download="Midhun_Krishna_Resume.pdf" class="resume-download-btn">
+                    [📥] DOWNLOAD_REQUISITION_RESUME.PDF
+                </a>
+            </div>
+
+            <!-- Tab 2: Lab Infrastructures -->
+            <div id="labs" class="tab-panel">
+                <div class="section-header">> SIMULATED DEFENSIVE DEPLOYMENTS</div>
+                
+                <div class="lab-card">
+                    <div class="lab-title">Infosec Home Lab Architect</div>
+                    <div class="lab-desc">
+                        Engineered isolated virtual infrastructure hosting cross-functional Kali Linux, Ubuntu, and Windows environments using VMware and VirtualBox. Simulated malicious multi-stage payloads against unpatched components to study trace footprint collection.
                     </div>
                 </div>
-                <div class="skill-card">
-                    <h3>Security Tools</h3>
-                    <div class="skill-tags">Nmap, Burp Suite, Wireshark, Metasploit, Nikto, OpenVAS</div>
-                </div>
-                <div class="skill-card">
-                    <h3>Core Concepts</h3>
-                    <div class="skill-tags">VAPT, OWASP Top 10, SIEM Fundamentals, TCP/IP, Firewalls, VPNs</div>
-                </div>
-                <div class="skill-card">
-                    <h3>Environments</h3>
-                    <div class="skill-tags">Kali Linux, Ubuntu, Windows 10/11, VMware, VirtualBox</div>
+
+                <div class="lab-card">
+                    <div class="lab-title">TryHackMe Active Practitioner</div>
+                    <div class="lab-desc">
+                        Successfully cracked 50+ threat scenarios covering active host exploration via Nmap, Metasploit payload injection, privilege escalation audits, and packet data breakdown in Wireshark.
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2>Practical Security Projects</h2>
-            
-            <div class="project-card">
-                <h3>Cybersecurity Lab Practitioner</h3>
-                <div class="project-meta">TryHackMe Platform</div>
-                <ul>
-                    <li><strong>Vulnerability Assessment:</strong> Completed over 50+ hands-on simulated environments covering automated scanning and active reconnaissance.</li>
-                    <li><strong>Exploitation:</strong> Utilized the Metasploit Framework to identify system loopholes, configure exploit payloads, and execute privilege escalation vectors safely.</li>
-                    <li><strong>Web Application Testing:</strong> Audited lab applications against the OWASP Top 10 framework, manually exploiting and mitigating SQLi and XSS flaws.</li>
-                </ul>
+            <!-- Tab 3: Security Arsenal -->
+            <div id="arsenal" class="tab-panel">
+                <div class="section-header">> UTILITIES & SECURITY ENGINES</div>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="category-title">[CORE_TOOLS]</div>
+                        <div class="skill-list">Nmap, Wireshark, Burp Suite, Metasploit, Nikto, OpenVAS</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="category-title">[TARGET_FLAWS]</div>
+                        <div class="skill-list">OWASP Top 10, SQLi, Cross-Site Scripting (XSS), Auth Testing</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="category-title">[ENVIRONMENTS]</div>
+                        <div class="skill-list">Kali Linux, Ubuntu, VMware, VirtualBox, Windows 10/11</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="category-title">[CONCEPTS]</div>
+                        <div class="skill-list">SIEM Fundamentals, IDS/IPS, VPNs, Firewalls, TCP/IP Parsing</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="project-card">
-                <h3>Information Security Home Lab Architect</h3>
-                <div class="project-meta">Personal Infrastructure</div>
-                <ul>
-                    <li><strong>Environment Simulation:</strong> Engineered an isolated virtual network architecture using VMware and VirtualBox hosting cross-functional Linux and Windows instances.</li>
-                    <li><strong>Attack & Defense Emulation:</strong> Safely simulated multi-stage attack scenarios to validate security baseline configurations and study system hardening techniques.</li>
-                </ul>
-            </div>
-        </section>
+        </div>
 
-        <!-- Education Section -->
-        <section id="education">
-            <h2>Education</h2>
-            <h3 style="margin-bottom:0.2rem;">Bachelor of Computer Applications (BCA)</h3>
-            <div style="color: var(--accent); font-size: 0.9rem; margin-bottom: 0.5rem;">University of Kerala | Coursework Completed: 2021 – 2024</div>
-            <p style="color: var(--text-muted); margin-top:0;">
-                Completed 3 years of standard classroom curriculum, practical labs, and core syllabus. Currently appearing for final backlog modules to formally finish degree certification.
-            </p>
-        </section>
+        <!-- Terminal System Footer -->
+        <div class="terminal-footer">
+            <span>LOC // CHENGANNUR_KL_IN</span>
+            <span>SYS_VERSION // 4.6.26</span>
+            <span style="color: var(--matrix-green);">PACKETS_ENCRYPTED</span>
+        </div>
 
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2026 Midhun Krishna. All rights reserved.</p>
-        </footer>
     </div>
+
+    <!-- Interface Controller Engine -->
+    <script>
+        function openTab(evt, tabId) {
+            const panels = document.getElementsByClassName("tab-panel");
+            for (let i = 0; i < panels.length; i++) {
+                panels[i].className = panels[i].className.replace(" active", "");
+            }
+
+            const buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].className = buttons[i].className.replace(" active", "");
+            }
+
+            document.getElementById(tabId).className += " active";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 
 </body>
 </html>
